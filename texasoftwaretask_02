@@ -1,0 +1,48 @@
+class ExpenseTracker:
+    def __init__(self):
+        self.expenses = []
+
+    def add_expense(self, amount, category, description):
+        expense = {
+            "amount": amount,
+            "category": category,
+            "description": description,
+            "date": "2024-09-24"  # For simplicity, using a static date
+        }
+        self.expenses.append(expense)
+        print("Expense added!")
+
+    def view_expenses(self):
+        if not self.expenses:
+            print("No expenses recorded.")
+            return
+        for idx, expense in enumerate(self.expenses, start=1):
+            print(f"{idx}. {expense['date']} - {expense['description']} (${expense['amount']}) [{expense['category']}]")
+
+    def category_summary(self):
+        summary = {}
+        for expense in self.expenses:
+            category = expense['category']
+            summary[category] = summary.get(category, 0) + expense['amount']
+        for category, total in summary.items():
+            print(f"{category}: ${total}")
+
+    def total_expenses(self):
+        total = sum(expense['amount'] for expense in self.expenses)
+        print(f"Total Expenses: ${total}")
+
+
+# Sample usage
+tracker = ExpenseTracker()
+
+# Adding expenses
+tracker.add_expense(50.0, "Food", "Lunch")
+tracker.add_expense(20.0, "Transport", "Bus ticket")
+tracker.add_expense(15.0, "Food", "Dinner")
+
+# Viewing expenses
+tracker.view_expenses()
+
+# Summary
+tracker.category_summary()
+tracker.total_expenses()
